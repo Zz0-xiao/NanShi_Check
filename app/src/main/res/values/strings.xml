@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NanShi_Check</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="tab_names">
+        <item>考试管理</item>
+        <item>设备管理</item>
+        <item>成绩管理</item>
+    </string-array>
+</resources>
