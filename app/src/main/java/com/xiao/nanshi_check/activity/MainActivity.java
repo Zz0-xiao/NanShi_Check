@@ -1,5 +1,7 @@
 package com.xiao.nanshi_check.activity;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,9 +12,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.FragmentAdapter;
+import com.xiao.nanshi_check.service.BluetoothService;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,6 +28,43 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private String[] tab_names;
+
+
+    // 调试以排除故障
+    private static final String TAG = "Bluetooth";
+    private static final boolean D = true;
+
+    // 消息类型从蓝牙发送聊天服务处理程序
+    public static final int MESSAGE_STATE_CHANGE = 1;
+    public static final int MESSAGE_READ = 2;
+    public static final int MESSAGE_WRITE = 3;
+    public static final int MESSAGE_DEVICE_NAME = 4;
+    public static final int MESSAGE_TOAST = 5;
+
+    // 键名收到蓝牙聊天服务处理程序
+    public static final String DEVICE_NAME = "device_name";
+    public static final String TOAST = "toast";
+
+    // 意图请求代码
+    private static final int REQUEST_CONNECT_DEVICE = 1;
+    private static final int REQUEST_ENABLE_BT = 2;
+
+    // Layout Views
+//    private TextView mTitle;
+    private ListView mConversationView;
+    private EditText mOutEditText;
+    private Button mSendButton;
+
+    // 连接设备的名称
+    private String mConnectedDeviceName = null;
+    // 数组适配器对话线程
+    private ArrayAdapter<String> mConversationArrayAdapter;
+    // 字符串缓冲区传出消息
+    private StringBuffer mOutStringBuffer;
+    // 本地蓝牙适配器
+    private BluetoothAdapter mBluetoothAdapter = null;
+    // 成员对象聊天服务
+    private BluetoothService mChatService = null;
 
     @Override
     protected int getContentView() {
@@ -107,6 +151,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
 
         if (id == R.id.nav_tudent_management) {
+            startActivity(new Intent(MainActivity.this, Bluetooth.class));
 
         } else if (id == R.id.nav_rights_management) {
 
