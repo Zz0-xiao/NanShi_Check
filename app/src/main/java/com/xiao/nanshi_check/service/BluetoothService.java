@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.xiao.nanshi_check.activity.Bluetooth;
+import com.xiao.nanshi_check.activity.MainActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,7 +69,7 @@ public class BluetoothService {
         mState = state;
 
         // 给新状态处理程序的UI活动可以更新
-        mHandler.obtainMessage(Bluetooth.MESSAGE_STATE_CHANGE, state, -1)
+        mHandler.obtainMessage(MainActivity.MESSAGE_STATE_CHANGE, state, -1)
                 .sendToTarget();
     }
 
@@ -171,9 +171,9 @@ public class BluetoothService {
         mConnectedThread.start();
 
         // 连接设备的名称发送回UI的活动
-        Message msg = mHandler.obtainMessage(Bluetooth.MESSAGE_DEVICE_NAME);
+        Message msg = mHandler.obtainMessage(MainActivity.MESSAGE_DEVICE_NAME);
         Bundle bundle = new Bundle();
-        bundle.putString(Bluetooth.DEVICE_NAME, device.getName());
+        bundle.putString(MainActivity.DEVICE_NAME, device.getName());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
@@ -227,9 +227,9 @@ public class BluetoothService {
         setState(STATE_LISTEN);
 
         // 发送失败消息回的活动
-        Message msg = mHandler.obtainMessage(Bluetooth.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(MainActivity.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(Bluetooth.TOAST, "无法连接设备");
+        bundle.putString(MainActivity.TOAST, "无法连接设备");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }
@@ -241,9 +241,9 @@ public class BluetoothService {
         setState(STATE_LISTEN);
 
         // 发送失败消息回的活动
-        Message msg = mHandler.obtainMessage(Bluetooth.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(MainActivity.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(Bluetooth.TOAST, "Device connection was lost");
+        bundle.putString(MainActivity.TOAST, "Device connection was lost");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }
@@ -426,7 +426,7 @@ public class BluetoothService {
                     bytes = mmInStream.read(buffer);
 
                     // 将获得的字节发送到UI的活动
-                    mHandler.obtainMessage(Bluetooth.MESSAGE_READ, bytes,
+                    mHandler.obtainMessage(MainActivity.MESSAGE_READ, bytes,
                             -1, buffer).sendToTarget();
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);
@@ -446,7 +446,7 @@ public class BluetoothService {
                 mmOutStream.write(buffer);
 
                 // 把消息送回UI活动分享
-                mHandler.obtainMessage(Bluetooth.MESSAGE_WRITE, -1, -1,
+                mHandler.obtainMessage(MainActivity.MESSAGE_WRITE, -1, -1,
                         buffer).sendToTarget();
             } catch (IOException e) {
                 Log.e(TAG, "Exception during write", e);
