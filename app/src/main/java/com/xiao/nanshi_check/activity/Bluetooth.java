@@ -41,7 +41,7 @@ public class Bluetooth extends AppCompatActivity {
 
     // 意图请求代码
     private static final int REQUEST_CONNECT_DEVICE = 1;
-    private static final int REQUEST_ENABLE_BT = 2;
+//    private static final int REQUEST_ENABLE_BT = 2;
 
     private ListView mConversationView;
     private EditText mOutEditText;
@@ -54,7 +54,7 @@ public class Bluetooth extends AppCompatActivity {
     // 字符串缓冲区传出消息
     private StringBuffer mOutStringBuffer;
     // 本地蓝牙适配器
-    private BluetoothAdapter mBluetoothAdapter = null;
+//    private BluetoothAdapter mBluetoothAdapter = null;
     // 成员对象聊天服务
     private BluetoothService mChatService = null;
 
@@ -66,14 +66,14 @@ public class Bluetooth extends AppCompatActivity {
         setContentView(R.layout.activity_bluetooth);
         // 获取本地蓝牙适配器
 
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        // 如果适配器是null,那么不支持蓝牙
+       /* // 如果适配器是null,那么不支持蓝牙
         if (mBluetoothAdapter == null) {
             Toast.makeText(this, "不支持蓝牙", Toast.LENGTH_LONG).show();
             finish();
             return;
-        }
+        }*/
     }
 
     public void onclick(View v) {
@@ -92,13 +92,14 @@ public class Bluetooth extends AppCompatActivity {
         // 如果不是BT,请求它被启用。
         // setupChat() will then be called during onActivityResult
         // setupChat在onActivityResult()将被调用 上面的翻译
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-            // 否则,设置聊天会话
-        } else {
-            if (mChatService == null) setupChat();
-        }
+//        if (!mBluetoothAdapter.isEnabled()) {
+//            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+//            // 否则,设置聊天会话
+//        } else {
+//            if (mChatService == null) setupChat();
+//        }
+        if (mChatService == null) setupChat();
     }
 
 
@@ -265,12 +266,12 @@ public class Bluetooth extends AppCompatActivity {
                     String address = data.getExtras()
                             .getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
                     // 得到BLuetoothDevice对象
-                    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+//                    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
                     //试图连接到设备
-                    mChatService.connect(device);
+//                    mChatService.connect(device);
                 }
                 break;
-            case REQUEST_ENABLE_BT:
+           /* case REQUEST_ENABLE_BT:
                 // 当请求启用蓝牙的回报
                 if (resultCode == Activity.RESULT_OK) {
                     // 蓝牙现在启用,所以建立一个聊天会话
@@ -280,7 +281,7 @@ public class Bluetooth extends AppCompatActivity {
                     Log.d(TAG, "BT not enabled");
                     Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
                     finish();
-                }
+                }*/
         }
     }
 }
