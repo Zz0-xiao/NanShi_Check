@@ -43,8 +43,6 @@ public class Bluetooth extends AppCompatActivity {
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
 
-    // Layout Views
-//    private TextView mTitle;
     private ListView mConversationView;
     private EditText mOutEditText;
     private Button mSendButton;
@@ -164,16 +162,16 @@ public class Bluetooth extends AppCompatActivity {
         if (mChatService != null) mChatService.stop();
         if (D) Log.e(TAG, "--- ON DESTROY ---");
     }
-
-    private void ensureDiscoverable() {
-        if (D) Log.d(TAG, "ensure discoverable");
-        if (mBluetoothAdapter.getScanMode() !=
-                BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-            startActivity(discoverableIntent);
-        }
-    }// 确保该设备容易被别人
+//
+//    private void ensureDiscoverable() {
+//        if (D) Log.d(TAG, "ensure discoverable");
+//        if (mBluetoothAdapter.getScanMode() !=
+//                BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+//            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+//            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+//            startActivity(discoverableIntent);
+//        }
+//    }// 确保该设备容易被别人
 
     private void sendMessage(String message) {
         // 检查我们之前任何连接

@@ -29,43 +29,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private TabLayout tabLayout;
     private String[] tab_names;
 
-
-    // 调试以排除故障
-    private static final String TAG = "Bluetooth";
-    private static final boolean D = true;
-
-    // 消息类型从蓝牙发送聊天服务处理程序
-    public static final int MESSAGE_STATE_CHANGE = 1;
-    public static final int MESSAGE_READ = 2;
-    public static final int MESSAGE_WRITE = 3;
-    public static final int MESSAGE_DEVICE_NAME = 4;
-    public static final int MESSAGE_TOAST = 5;
-
-    // 键名收到蓝牙聊天服务处理程序
-    public static final String DEVICE_NAME = "device_name";
-    public static final String TOAST = "toast";
-
-    // 意图请求代码
-    private static final int REQUEST_CONNECT_DEVICE = 1;
-    private static final int REQUEST_ENABLE_BT = 2;
-
-    // Layout Views
-//    private TextView mTitle;
-    private ListView mConversationView;
-    private EditText mOutEditText;
-    private Button mSendButton;
-
-    // 连接设备的名称
-    private String mConnectedDeviceName = null;
-    // 数组适配器对话线程
-    private ArrayAdapter<String> mConversationArrayAdapter;
-    // 字符串缓冲区传出消息
-    private StringBuffer mOutStringBuffer;
-    // 本地蓝牙适配器
-    private BluetoothAdapter mBluetoothAdapter = null;
-    // 成员对象聊天服务
-    private BluetoothService mChatService = null;
-
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
@@ -99,15 +62,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void initTabLayout() {
-
-//        List<Fragment> fragmentList = new ArrayList<>();
-//        for (int i = 0; i < tabList.size(); i++) {
-//            Fragment f1 = new TabFragment();
-//            Bundle bundle = new Bundle();
-//            bundle.putString("content", "http://blog.csdn.net/feiduclear_up \n CSDN 废墟的树");
-//            f1.setArguments(bundle);
-//            fragmentList.add(f1);
-//        }
         viewPager = findView(R.id.viewPager);
         tabLayout = findView(R.id.tabs);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式 TabLayout.MODE_SCROLLABLE
