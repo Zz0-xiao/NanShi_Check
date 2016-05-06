@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NanShi_Check</string>
+    <string name="app_name">考核软件</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -16,7 +16,6 @@
     <!--  BluetoothChat -->
     <string name="send">发送</string>
     <string name="not_connected">你没有连接到一个设备</string>
-    <string name="bt_not_enabled_leaving">蓝牙不启用。离开蓝牙聊天。</string>
     <string name="title_connecting">连接……</string>
     <string name="title_connected_to">连接: </string>
     <string name="title_not_connected">没有连接</string>
