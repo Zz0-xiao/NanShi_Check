@@ -13,8 +13,10 @@ import com.xiao.nanshi_check.R;
 public class SplashActivity extends AppCompatActivity {
 
     // 本地蓝牙适配器
-    private BluetoothAdapter mBluetoothAdapter = null;
+    private  BluetoothAdapter mBluetoothAdapter = null;
+    // 意图请求代码
     private static final int REQUEST_ENABLE_BT = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,6 @@ public class SplashActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
 
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
-
 //                Intent intent = new Intent(this, MainActivity.class);
 //                intent.putExtra("MBLUETOOTHADAPTER",mBluetoothAdapter);
 //                startActivity(intent);
@@ -59,7 +60,6 @@ public class SplashActivity extends AppCompatActivity {
 //
 //                intent.putExtras(bundle);
 //                startActivity(intent);
-
                 finish();
             } else {
                 // 用户不启用蓝牙或发生一个错误

@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initView() {
+//    SplashActivity.
 
         Resources res = getResources();
         tab_names = res.getStringArray(R.array.tab_names);
@@ -108,6 +109,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(new Intent(MainActivity.this, Bluetooth.class));
 
         } else if (id == R.id.nav_rights_management) {
+
+            // 启动DeviceListActivity看到设备和做扫描
+            Intent serverIntent = new Intent(this, DeviceListActivity.class);
+            startActivityForResult(serverIntent, 1);
 
         } else if (id == R.id.nav_test_question_management) {
 

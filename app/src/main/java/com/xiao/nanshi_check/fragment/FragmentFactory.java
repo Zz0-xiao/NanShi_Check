@@ -29,9 +29,9 @@ public class FragmentFactory {
             mFragments.put(position, fragment);// 把创建好的Fragment存放到集合中缓存起来
         }
 
-        Bundle bundle = new Bundle();
-        bundle.putString("content", "http://blog.csdn.net/feiduclear_up \n CSDN 废墟的树");
-        fragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("content", "http://blog.csdn.net/feiduclear_up \n CSDN 废墟的树");
+//        fragment.setArguments(bundle);
         return fragment;
 
     }

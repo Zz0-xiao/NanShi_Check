@@ -30,7 +30,8 @@ import com.xiao.nanshi_check.R;
 /**
  * 这个活动是一个对话框。它列出任何配对设备和设备检测后发现。由用户选择设备时,设备的MAC地址被发送回父母的活动 结果意图。
  */
-public class DeviceListActivity extends AppCompatActivity {
+public class DeviceListActivity extends
+        AppCompatActivity {
     // Debugging
     private static final String TAG = "DeviceListActivity";
     private static final boolean D = true;
