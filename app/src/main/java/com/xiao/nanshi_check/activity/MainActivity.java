@@ -9,8 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.FragmentAdapter;
@@ -48,7 +50,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("啊西吧");
+        toolbar.setTitle("智能考核");
 //        toolbar.setSubtitle("sub");
 //        toolbar.setLogo(R.drawable.ic_launcher);
 //        toolbar.setNavigationIcon(R.drawable.ic_list_black_24dp);
@@ -89,6 +91,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }if(id==R.id.action_edit){
+            Toast.makeText(MainActivity.this, "查找", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

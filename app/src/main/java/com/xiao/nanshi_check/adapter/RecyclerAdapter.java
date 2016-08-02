@@ -54,17 +54,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch vibrant = palette.getVibrantSwatch();//有活力
-                Palette.Swatch c = palette.getDarkVibrantSwatch();//有活力 暗色
+               /* Palette.Swatch c = palette.getDarkVibrantSwatch();//有活力 暗色
                 Palette.Swatch d = palette.getLightVibrantSwatch();//有活力 亮色
                 Palette.Swatch f = palette.getMutedSwatch();//柔和
                 Palette.Swatch a = palette.getDarkMutedSwatch();//柔和 暗色
-                Palette.Swatch b = palette.getLightMutedSwatch();//柔和 亮色
+                Palette.Swatch b = palette.getLightMutedSwatch();//柔和 亮色*/
 
                 if (vibrant != null) {
-                    int color1 = vibrant.getBodyTextColor();//内容颜色
+                    /*int color1 = vibrant.getBodyTextColor();//内容颜色
                     int color2 = vibrant.getTitleTextColor();//标题颜色
                     int color3 = vibrant.getRgb();//rgb颜色
-
+*/
                     holder.title.setBackgroundColor(
                             vibrant.getRgb());
                     holder.title.setTextColor(

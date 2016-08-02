@@ -13,27 +13,6 @@
         <item>成绩管理</item>
     </string-array>
 
-    <!--  BluetoothChat -->
-    <string name="send">发送</string>
-    <string name="not_connected">你没有连接到一个设备</string>
-    <string name="bt_not_enabled_leaving">蓝牙不启用。离开蓝牙聊天。</string>
-    <string name="title_connecting">连接……</string>
-    <string name="title_connected_to">连接: </string>
-    <string name="title_not_connected">没有连接</string>
-
-    <!--  DeviceListActivity -->
-    <string name="scanning">扫描设备……</string>
-    <string name="select_device">选择一个设备连接</string>
-    <string name="none_paired">没有配对的设备</string>
-    <string name="none_found">没有发现设备</string>
-    <string name="title_paired_devices">配对的设备</string>
-    <string name="title_other_devices">其他可用的设备</string>
-    <string name="button_scan">扫描设备</string>
-
-    <!-- Options Menu -->
-    <string name="connect">连接设备</string>
-    <string name="discoverable">使发现的</string>
-
     <!-- Activity全屏 开始-->
     <style name="MyFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>

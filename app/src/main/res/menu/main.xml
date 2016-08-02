@@ -6,4 +6,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:orderInCategory="80"
+        android:title="查找"
+        app:showAsAction="always" />
 </menu>
