@@ -1,6 +1,5 @@
 package com.xiao.nanshi_check.activity;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.design.widget.NavigationView;
@@ -12,14 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 
 import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.FragmentAdapter;
-import com.xiao.nanshi_check.service.BluetoothService;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -106,13 +100,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
 
         if (id == R.id.nav_tudent_management) {
-            startActivity(new Intent(MainActivity.this, Bluetooth.class));
 
         } else if (id == R.id.nav_rights_management) {
-
-            // 启动DeviceListActivity看到设备和做扫描
-            Intent serverIntent = new Intent(this, DeviceListActivity.class);
-            startActivityForResult(serverIntent, 1);
 
         } else if (id == R.id.nav_test_question_management) {
 
