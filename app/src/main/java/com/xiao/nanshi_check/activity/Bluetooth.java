@@ -64,16 +64,6 @@ public class Bluetooth extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if (D) Log.e(TAG, "+++ ON CREATE +++");
         setContentView(R.layout.activity_bluetooth);
-        // 获取本地蓝牙适配器
-
-//        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-       /* // 如果适配器是null,那么不支持蓝牙
-        if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "不支持蓝牙", Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }*/
     }
 
     public void onclick(View v) {
@@ -88,26 +78,13 @@ public class Bluetooth extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         if (D) Log.e(TAG, "++ ON START ++");
-
-        // 如果不是BT,请求它被启用。
-        // setupChat() will then be called during onActivityResult
-        // setupChat在onActivityResult()将被调用 上面的翻译
-//        if (!mBluetoothAdapter.isEnabled()) {
-//            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-//            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-//            // 否则,设置聊天会话
-//        } else {
-//            if (mChatService == null) setupChat();
-//        }
         if (mChatService == null) setupChat();
     }
-
 
     @Override
     protected synchronized void onResume() {
         super.onResume();
         if (D) Log.e(TAG, "+ ON RESUME +");
-
         // 执行这种检查在onResume()覆盖的情况下BT
         // 未启用期间onStart(),所以我们停下来启用它……
         // onResume ACTION_REQUEST_ENABLE活动时()将返回。
@@ -130,7 +107,7 @@ public class Bluetooth extends AppCompatActivity {
 
         // 初始化组合字段返回键的一个侦听器
         mOutEditText = (EditText) findViewById(R.id.edit_text_out);
-        mOutEditText.setOnEditorActionListener(mWriteListener);
+//        mOutEditText.setOnEditorActionListener(mWriteListener);
 
         // 初始化发送按钮单击事件的监听器
         mSendButton = (Button) findViewById(R.id.button_send);
@@ -193,19 +170,19 @@ public class Bluetooth extends AppCompatActivity {
         }
     }
 
-    //    // EditText部件的动作侦听器,侦听返回键
-    private TextView.OnEditorActionListener mWriteListener =
-            new TextView.OnEditorActionListener() {
-                public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
-                    // 如果操作是一个激励的事件返回键,发送消息
-                    if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
-                        String message = view.getText().toString();
-                        sendMessage(message);
-                    }
-                    if (D) Log.i(TAG, "END onEditorAction");
-                    return true;
-                }
-            };
+//    // EditText部件的动作侦听器,侦听返回键
+//    private TextView.OnEditorActionListener mWriteListener =
+//            new TextView.OnEditorActionListener() {
+//                public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
+//                    // 如果操作是一个激励的事件返回键,发送消息
+//                    if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
+//                        String message = view.getText().toString();
+//                        sendMessage(message);
+//                    }
+//                    if (D) Log.i(TAG, "END onEditorAction");
+//                    return true;
+//                }
+//            };
     // 处理程序从BluetoothChatService回来的信息
     private final Handler mHandler = new Handler() {
         @Override
@@ -243,7 +220,7 @@ public class Bluetooth extends AppCompatActivity {
                 case MESSAGE_DEVICE_NAME:
                     // 保存连接设备的名字
                     mConnectedDeviceName = msg.getData().getString(DEVICE_NAME);
-                    Toast.makeText(getApplicationContext(), "Connected to "
+                    Toast.makeText(getApplicationContext(), "链接到"
                             + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
                     break;
                 case MESSAGE_TOAST:
@@ -265,23 +242,15 @@ public class Bluetooth extends AppCompatActivity {
                     // 设备的MAC地址
                     String address = data.getExtras()
                             .getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+
+                    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
                     // 得到BLuetoothDevice对象
-//                    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+                    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
                     //试图连接到设备
-//                    mChatService.connect(device);
+                    mChatService.connect(device);
                 }
                 break;
-           /* case REQUEST_ENABLE_BT:
-                // 当请求启用蓝牙的回报
-                if (resultCode == Activity.RESULT_OK) {
-                    // 蓝牙现在启用,所以建立一个聊天会话
-                    setupChat();
-                } else {
-                    // 用户不启用蓝牙或发生一个错误
-                    Log.d(TAG, "BT not enabled");
-                    Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
-                    finish();
-                }*/
         }
     }
 }
