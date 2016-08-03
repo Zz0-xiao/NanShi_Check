@@ -91,7 +91,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
-        }if(id==R.id.action_edit){
+        }
+        if (id == R.id.action_edit) {
             Toast.makeText(MainActivity.this, "查找", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
@@ -103,8 +104,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_tudent_management) {
-
+        if (id == R.id.nav_student_management) {
+            startActivity(new Intent(MainActivity.this, StudentManagementActivity.class));
         } else if (id == R.id.nav_rights_management) {
 
         } else if (id == R.id.nav_test_question_management) {
