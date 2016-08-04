@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xiao.nanshi_check.R;
-import com.xiao.nanshi_check.model.ModelBean;
 import com.xiao.nanshi_check.model.StudentsBean;
 
 import java.util.List;
