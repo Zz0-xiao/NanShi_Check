@@ -63,24 +63,30 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initTabLayout();
 
         fab = (FloatingActionButton) findViewById(R.id.fab2);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(MainActivity.this, "hahah ", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "hahah " + tabLayout.getSelectedTabPosition(), Toast.LENGTH_SHORT).show();
+                if (tabLayout.getSelectedTabPosition() == 1) {
+                    Toast.makeText(MainActivity.this, "设备管理 ", Toast.LENGTH_SHORT).show();
+                } else if (tabLayout.getSelectedTabPosition() == 2) {
+                    Toast.makeText(MainActivity.this, "成绩 ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
+/*
     //回调隐藏fab
     public void invisible() {
         fab.setVisibility(View.INVISIBLE);
     }
 
-    //回调延时fab
+    //回调显示fab
     public void visible() {
-
         fab.setVisibility(View.VISIBLE);
     }
+*/
 
 
     private void initTabLayout() {
@@ -91,6 +97,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         viewPager.setAdapter(fragmentAdapter);//给ViewPager设置适配器
         tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
         tabLayout.setTabsFromPagerAdapter(fragmentAdapter);//给Tabs设置适配器
+
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+               /* BaseFragment createFragment = FragmentFactory.createFragment(position);
+                createFragment.show();//  当切换界面的时候 重新请求服务器 */
+//                Toast.makeText(MainActivity.this, position + "hahah " + tabLayout.getSelectedTabPosition(), Toast.LENGTH_SHORT).show();
+                if (position == 0) {
+                    fab.setVisibility(View.GONE);
+                } else if (position == 1) {
+                    fab.setVisibility(View.VISIBLE);
+                } else if (position == 2) {
+                    fab.setVisibility(View.VISIBLE);
+                }
+            }
+
+        });
     }
 
 

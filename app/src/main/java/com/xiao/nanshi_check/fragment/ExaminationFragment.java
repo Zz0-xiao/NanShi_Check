@@ -34,8 +34,7 @@ public class ExaminationFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        MainActivity parentActivity = (MainActivity) getActivity();
-        parentActivity.visible();
+//        ((MainActivity)getActivity()).visible();//显示
 
     }
 }

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,6 @@ public class EquipmentFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_equipment, container, false);
 
 
-
         return view;
     }
 
@@ -69,10 +69,7 @@ public class EquipmentFragment extends Fragment {
 //                Toast.makeText(getActivity(), "添加设备", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-        MainActivity parentActivity = (MainActivity) getActivity();
-        parentActivity.invisible();
-
-
+//        ((MainActivity) getActivity()).invisible();//隐藏
         initData();
     }
 
