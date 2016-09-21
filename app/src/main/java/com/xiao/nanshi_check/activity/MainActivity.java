@@ -2,6 +2,7 @@ package com.xiao.nanshi_check.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
@@ -24,6 +26,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private String[] tab_names;
+
+
+    private FloatingActionButton fab;////
 
     @Override
     protected int getContentView() {
@@ -56,7 +61,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        toolbar.setNavigationIcon(R.drawable.ic_list_black_24dp);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回按钮
         initTabLayout();
+
+        fab = (FloatingActionButton) findViewById(R.id.fab2);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "hahah ", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
+
+    //回调隐藏fab
+    public void invisible() {
+        fab.setVisibility(View.INVISIBLE);
+    }
+
+    //回调延时fab
+    public void visible() {
+
+        fab.setVisibility(View.VISIBLE);
+    }
+
 
     private void initTabLayout() {
         viewPager = findView(R.id.viewPager);
@@ -122,4 +147,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

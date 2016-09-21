@@ -1,5 +1,6 @@
 package com.xiao.nanshi_check.activity;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -7,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
 
 import com.xiao.nanshi_check.adapter.StudentManagementRecylerAdapter;
+import com.xiao.nanshi_check.behavior.ScaleDownShowBehavior;
 import com.xiao.nanshi_check.model.StudentsBean;
 
 import java.util.ArrayList;
@@ -23,6 +26,8 @@ public class StudentManagementActivity extends BaseActivity {
     private Toolbar toolbar;
     private List<StudentsBean> studentsList;
     private StudentManagementRecylerAdapter adapter;
+
+    private FloatingActionButton fab;
 
     @Override
     protected int getContentView() {
@@ -43,17 +48,21 @@ public class StudentManagementActivity extends BaseActivity {
         initRecyclerView();
         initData();
 
+        /*ScaleDownShowBehavior scaleDownShowFab = ScaleDownShowBehavior.from(fab);
+        scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);
+*/
     }
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(StudentManagementActivity.this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
     private void initData() {
         studentsList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 50; i++) {
             StudentsBean bean = new StudentsBean();
             bean.setId("" + i);
             bean.setGrade("机电" + i);
@@ -70,7 +79,22 @@ public class StudentManagementActivity extends BaseActivity {
                 Toast.makeText(StudentManagementActivity.this, "第" + position + "条被按下了", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StudentManagementActivity.this, "添加学生和导入", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+/*    private ScaleDownShowBehavior.OnStateChangedListener onStateChangedListener = new ScaleDownShowBehavior.OnStateChangedListener() {
+        @Override
+        public void onChanged(boolean isShow) {
+
+        }
+    };*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

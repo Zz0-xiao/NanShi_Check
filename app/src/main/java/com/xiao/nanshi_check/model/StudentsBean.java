@@ -5,7 +5,7 @@ package com.xiao.nanshi_check.model;
  */
 public class StudentsBean {
     String name;
-    String Grade;
+    String grade;
     String id;
 
     public String getName() {
@@ -17,11 +17,11 @@ public class StudentsBean {
     }
 
     public String getGrade() {
-        return Grade;
+        return grade;
     }
 
     public void setGrade(String grade) {
-        Grade = grade;
+        this.grade = grade;
     }
 
     public String getId() {
