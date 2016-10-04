@@ -100,6 +100,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
+
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);

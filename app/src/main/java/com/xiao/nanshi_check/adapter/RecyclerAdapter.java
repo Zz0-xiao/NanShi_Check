@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by ZzZz on 2016/4/30/0030.
  */
-
+////没用的看看
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
 

@@ -1,7 +1,6 @@
 package com.xiao.nanshi_check.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,11 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.xiao.nanshi_check.R;
-import com.xiao.nanshi_check.adapter.RecyclerAdapter;
-import com.xiao.nanshi_check.model.ModelBean;
+import com.xiao.nanshi_check.adapter.ResultsRecylerAdapter;
+import com.xiao.nanshi_check.model.StudentsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +20,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
+//成绩管理
 public class ResultsFragment extends Fragment {
-    private String content;
     private View view;
+    //    private String content;
     private RecyclerView recyclerView;
 
-    private List<ModelBean> beanList;
-    private RecyclerAdapter adapter;
-
-    private String des[] = {
-            "逗逼你好1", "逗逼你好2", "逗逼你好3",
-            "逗逼你好4", "逗逼你好5", "逗逼你好6",
-            "逗逼你好7", "逗逼你好8", "逗逼你好9",};
-
-    private int resId[] = {
-            R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,};
+    private List<StudentsBean> beanList;
+    private ResultsRecylerAdapter adapter;
 
     public ResultsFragment() {
         // Required empty public constructor
@@ -47,10 +36,7 @@ public class ResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        TextView textView = new TextView(getActivity());
-//        textView.setText("成绩");
-//        return textView;
-        view = inflater.inflate(R.layout.item, container, false);
+        view = inflater.inflate(R.layout.fragment_resultsfragment, container, false);
         return view;
     }
 
@@ -61,25 +47,46 @@ public class ResultsFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+//        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+//        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab2);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "添加设备", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        ((MainActivity) getActivity()).invisible();//隐藏
         initData();
     }
 
-
     private void initData() {
         beanList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            ModelBean bean = new ModelBean();
-            bean.setResId(resId[i]);
-            bean.setTitle(des[i]);
+        for (int i = 0; i < 130; i++) {
+            StudentsBean bean = new StudentsBean();
+            bean.setId("学号:00" + i);
             beanList.add(bean);
         }
-        adapter = new RecyclerAdapter(getActivity(), beanList);
+        adapter = new ResultsRecylerAdapter(getActivity(), beanList);
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+       /* adapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, Object object) {
 //                startActivity(new Intent(getActivity(), TwoActivity.class));
             }
-        });
+        });*/
+
+      /*  ScaleDownShowBehavior scaleDownShowFab = ScaleDownShowBehavior.from(fab);
+        scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);*/
+
+
     }
+
+
+   /* private ScaleDownShowBehavior.OnStateChangedListener onStateChangedListener = new ScaleDownShowBehavior.OnStateChangedListener() {
+        @Override
+        public void onChanged(boolean isShow) {
+
+        }
+    };*/
 }

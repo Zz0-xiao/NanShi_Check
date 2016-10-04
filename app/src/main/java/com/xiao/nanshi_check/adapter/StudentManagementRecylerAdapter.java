@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by zzzzz on 16/8/4/0004.
  */
-
+///学生管理
 public class StudentManagementRecylerAdapter extends RecyclerView.Adapter<StudentManagementRecylerAdapter.MyViewHolder> {
 
     private Context context;
@@ -82,6 +82,8 @@ public class StudentManagementRecylerAdapter extends RecyclerView.Adapter<Studen
     public interface OnItemClickListener {
         void onItemClick(int position, Object object);
     }
+
+
 
     /**
      * 设置监听方法

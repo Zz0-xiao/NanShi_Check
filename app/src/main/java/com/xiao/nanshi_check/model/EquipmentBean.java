@@ -7,6 +7,15 @@ public class EquipmentBean {
     String equipmentIp;
     String equipmentName;
 
+    public EquipmentBean() {
+
+    }
+
+    public EquipmentBean(String equipmentIp, String equipmentName) {
+        this.equipmentIp = equipmentIp;
+        this.equipmentName = equipmentName;
+    }
+
     public String getEquipmentIp() {
         return equipmentIp;
     }
@@ -19,7 +28,17 @@ public class EquipmentBean {
         return equipmentName;
     }
 
+    @Override
+    public String toString() {
+        return "EquipmentBean{" +
+                "equipmentIp='" + equipmentIp + '\'' +
+                ", equipmentName='" + equipmentName + '\'' +
+                '}';
+    }
+
     public void setEquipmentName(String equipmentName) {
         this.equipmentName = equipmentName;
     }
+
+
 }

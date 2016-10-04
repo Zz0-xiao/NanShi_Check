@@ -16,12 +16,17 @@ import java.util.List;
 /**
  * Created by zzzzz on 16/8/5/0005.
  */
+
+//设备管理
 public class EquipmentRecylerAdapter extends RecyclerView.Adapter<EquipmentRecylerAdapter.MyViewHolder> {
 
     private Context context;
     private List<EquipmentBean> list;
     private Resources res;
 //    private OnItemClickListener listener;
+
+    public OnItemClickListener mOnItemClickListener = null;//点击
+    public OnItemLongClickListener mOnLongItemClickListener = null;//长按
 
     public EquipmentRecylerAdapter(Context context, List<EquipmentBean> list) {
         this.context = context;
@@ -41,12 +46,34 @@ public class EquipmentRecylerAdapter extends RecyclerView.Adapter<EquipmentRecyl
         final EquipmentBean bean = list.get(position);
         holder.equipmentIp.setText(bean.getEquipmentIp());
         holder.equipmentName.setText(bean.getEquipmentName());
+
+        /**
+         * 调用接口回调
+         */
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != mOnItemClickListener)
+                    mOnItemClickListener.onItemClick(position, bean);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mOnLongItemClickListener != null) {
+                    mOnLongItemClickListener.OnItemLongClick(position, bean);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return null == list ? 0 : list.size();
     }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView equipmentIp;
@@ -58,4 +85,38 @@ public class EquipmentRecylerAdapter extends RecyclerView.Adapter<EquipmentRecyl
             equipmentName = (TextView) itemView.findViewById(R.id.tv_equipment_name);
         }
     }
+
+
+    /**
+     * 内部接口回调方法
+     */
+    public interface OnItemClickListener {
+        void onItemClick(int position, Object object);
+    }
+
+    /**
+     * 内部接口回调方法
+     */
+    public interface OnItemLongClickListener {
+        void OnItemLongClick(int position, Object object);
+    }
+
+    /**
+     * 设置监听方法
+     *
+     * @param listener
+     */
+    public void setOnItemClickListener(EquipmentRecylerAdapter.OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
+    /**
+     * 设置监听方法
+     *
+     * @param listener
+     */
+    public void OnItemLongClickListener(EquipmentRecylerAdapter.OnItemLongClickListener listener) {
+        this.mOnLongItemClickListener = listener;
+    }
+
 }

@@ -5,8 +5,11 @@ package com.xiao.nanshi_check.model;
  */
 public class StudentsBean {
     String name;
-    String grade;
+    String grade;//年级
     String id;
+    String testScore;//分数
+    String testTime;//考试时间
+    String testDate;//考试日期
 
     public String getName() {
         return name;
@@ -30,5 +33,29 @@ public class StudentsBean {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTestScore() {
+        return testScore;
+    }
+
+    public void setTestScore(String testScore) {
+        this.testScore = testScore;
+    }
+
+    public String getTestTime() {
+        return testTime;
+    }
+
+    public void setTestTime(String testTime) {
+        this.testTime = testTime;
+    }
+
+    public String getTestDate() {
+        return testDate;
+    }
+
+    public void setTestDate(String testDate) {
+        this.testDate = testDate;
     }
 }
