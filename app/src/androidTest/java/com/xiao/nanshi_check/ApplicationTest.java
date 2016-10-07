@@ -41,7 +41,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public void testAdd() throws Exception {
 
         InspectionDeviceDao dao = new InspectionDeviceDao(getContext());
-        for (long i = 0; i < 100; i++) {
+        for (long i = 0; i < 10; i++) {
             long number = i;
             dao.add("192.168.0." + number, "x62机床" + number);
         }

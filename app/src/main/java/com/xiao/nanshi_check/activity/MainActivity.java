@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.FragmentAdapter;
+import com.xiao.nanshi_check.db.dao.InspectionDeviceDao;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -69,6 +70,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                Toast.makeText(MainActivity.this, "hahah " + tabLayout.getSelectedTabPosition(), Toast.LENGTH_SHORT).show();
                 if (tabLayout.getSelectedTabPosition() == 1) {
                     Toast.makeText(MainActivity.this, "设备管理 ", Toast.LENGTH_SHORT).show();
+                    /**
+                     * 测试添加
+                     *
+                     * @throws Exception
+                     */
+                    InspectionDeviceDao dao = new InspectionDeviceDao(MainActivity.this);
+                    for (long i = 0; i < 10; i++) {
+                        long number = i;
+                        dao.add("192.168.0." + number, "x62机床" + number);
+                    }
                 } else if (tabLayout.getSelectedTabPosition() == 2) {
                     Toast.makeText(MainActivity.this, "成绩 ", Toast.LENGTH_SHORT).show();
                 }
