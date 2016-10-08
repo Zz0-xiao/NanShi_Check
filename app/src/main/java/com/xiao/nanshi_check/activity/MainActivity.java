@@ -76,6 +76,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
                     InspectionDeviceDao dao = new InspectionDeviceDao(MainActivity.this);
 //                    dao.add("192.168.0." , "x62机床"  );
+
+
                     for (int i = 0; i < 10; i++) {
                         int number = i;
                         dao.add("192.168.0." + number, "x62机床" + number);
