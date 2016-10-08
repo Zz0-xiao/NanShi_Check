@@ -74,13 +74,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                    EquipmentFragment ef = new EquipmentFragment(MainActivity.this);
 //                    ef.add1();
 
-//                    InspectionDeviceDao dao = new InspectionDeviceDao(MainActivity.this);
+                    InspectionDeviceDao dao = new InspectionDeviceDao(MainActivity.this);
 //                    dao.add("192.168.0." , "x62机床"  );
-//        boolean result = dao.add("192.168.0." , "x62机床" );
-//                    for (int i = 0; i < 10; i++) {
-//                        int number = i;
-//                        dao.add("192.168.0." + number, "x62机床" + number);
-//                    }
+                    for (int i = 0; i < 10; i++) {
+                        int number = i;
+                        dao.add("192.168.0." + number, "x62机床" + number);
+                    }
 
 
                 } else if (tabLayout.getSelectedTabPosition() == 2) {
