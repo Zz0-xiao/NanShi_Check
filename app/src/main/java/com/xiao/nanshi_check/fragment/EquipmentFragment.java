@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
+import com.xiao.nanshi_check.activity.MainActivity;
 import com.xiao.nanshi_check.adapter.EquipmentRecylerAdapter;
 import com.xiao.nanshi_check.db.InspectionDevice;
 import com.xiao.nanshi_check.db.dao.InspectionDeviceDao;
@@ -66,6 +68,15 @@ public class EquipmentFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+//        (MainActivity)getActivity()
+
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "有木有用", Toast.LENGTH_SHORT).show();
+            }
+        });
         initData();
     }
 
@@ -160,13 +171,13 @@ public class EquipmentFragment extends Fragment {
         }
     }
 
-//    public void add1() {
-//        InspectionDeviceDao dao = new InspectionDeviceDao(context);
-//        for (int i = 0; i < 2; i++) {
-//            dao.add("192.168.0." + i, "x62机床" + i);
-//        }
+    public void add1() {
+        InspectionDeviceDao dao = new InspectionDeviceDao(getActivity());
+        for (int i = 0; i < 2; i++) {
+            dao.add("192.168.0." + i, "x62机床" + i);
+        }
 //        adapter.notifyDataSetChanged();//更新?
-//        Toast.makeText(context, "设备管理 ", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "设备管理 ", Toast.LENGTH_SHORT).show();
 //        Log.i("haha", "haha");
 //        InspectionDeviceDao dao =  new InspectionDeviceDao(context);
 //        boolean result = dao.add("192.168.0." , "x62机床" );
@@ -175,5 +186,5 @@ public class EquipmentFragment extends Fragment {
 //            dao.add("192.168.0." + number, "x62机床" + number);
 //        }
 //        adapter.notifyDataSetChanged();//更新?
-//    }
+    }
 }

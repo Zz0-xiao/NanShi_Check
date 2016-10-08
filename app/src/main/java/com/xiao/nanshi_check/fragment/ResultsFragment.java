@@ -2,6 +2,7 @@ package com.xiao.nanshi_check.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.ResultsRecylerAdapter;
@@ -57,6 +59,15 @@ public class ResultsFragment extends Fragment {
 //            }
 //        });
 //        ((MainActivity) getActivity()).invisible();//隐藏
+
+
+    /*    FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "成绩管理", Toast.LENGTH_SHORT).show();
+            }
+        });*/
         initData();
     }
 
