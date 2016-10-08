@@ -1,6 +1,7 @@
 package com.xiao.nanshi_check.fragment;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,23 +30,26 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class EquipmentFragment extends Fragment {
+    public static final int JUDGE_QUERY_DELETE = -1;
     //设备管理
     private View view;
     //    private String content;
     private RecyclerView recyclerView;
-
     private List<EquipmentBean> beanList;
     private EquipmentRecylerAdapter adapter;
 
     private String deleteIp = "";
-    private InspectionDevice inspectionDevice;
-    private SQLiteDatabase db;
+//    Context context;
+//    private InspectionDeviceDao dao;
 
 
     public EquipmentFragment() {
         // Required empty public constructor
     }
 
+//    public EquipmentFragment(Context context1) {
+//        context = context1;
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,9 +71,9 @@ public class EquipmentFragment extends Fragment {
 
     private void initData() {
 
-        beanList = new ArrayList<EquipmentBean>();
-        dataDispose(-1);
 
+        beanList = new ArrayList<EquipmentBean>();
+        dataDispose(JUDGE_QUERY_DELETE);
         adapter = new EquipmentRecylerAdapter(getActivity(), beanList);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new EquipmentRecylerAdapter.OnItemClickListener() {
@@ -108,7 +111,7 @@ public class EquipmentFragment extends Fragment {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
                     }
                 });
                 //使用创建器,生成一个对话框对象
@@ -120,11 +123,10 @@ public class EquipmentFragment extends Fragment {
 
     private void dataDispose(int position) {
 
-        if (position == -1) {
+        if (position == JUDGE_QUERY_DELETE) {
             deleteIp = "";
         } else {
             deleteIp = beanList.get(position).getEquipmentIp().toString();
-//            Log.i("hahahh", "" + deleteIp);
         }
 
         //创建一个帮助类对象
@@ -143,9 +145,7 @@ public class EquipmentFragment extends Fragment {
             if (deleteIp.equals(equipmentIp)) {
                 InspectionDeviceDao dao = new InspectionDeviceDao(getContext());
                 dao.delete(equipmentIp);
-
-                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
-
+//                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
                 Iterator<EquipmentBean> sListIterator = beanList.iterator();
                 /*arraylist 删除东西**********************************************************************/
                 while (sListIterator.hasNext()) {
@@ -155,8 +155,25 @@ public class EquipmentFragment extends Fragment {
                         sListIterator.remove();
                     }
                 }
-                Log.i("", "删除后集合的长度为:" + beanList.size() + ":" + beanList);
+//                Log.i("", "删除后集合的长度为:" + beanList.size() + ":" + beanList);
             }
         }
     }
+
+//    public void add1() {
+//        InspectionDeviceDao dao = new InspectionDeviceDao(context);
+//        for (int i = 0; i < 2; i++) {
+//            dao.add("192.168.0." + i, "x62机床" + i);
+//        }
+//        adapter.notifyDataSetChanged();//更新?
+//        Toast.makeText(context, "设备管理 ", Toast.LENGTH_SHORT).show();
+//        Log.i("haha", "haha");
+//        InspectionDeviceDao dao =  new InspectionDeviceDao(context);
+//        boolean result = dao.add("192.168.0." , "x62机床" );
+//        for (int i = 0; i < 10; i++) {
+//            int number = i;
+//            dao.add("192.168.0." + number, "x62机床" + number);
+//        }
+//        adapter.notifyDataSetChanged();//更新?
+//    }
 }
