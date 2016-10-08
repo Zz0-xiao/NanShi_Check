@@ -60,6 +60,7 @@ public class ResultsFragment extends Fragment {
 //        });
 //        ((MainActivity) getActivity()).invisible();//隐藏
 
+
     /*    FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab2);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
