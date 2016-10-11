@@ -1,24 +1,22 @@
 package com.xiao.nanshi_check.fragment;
 
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
-import com.xiao.nanshi_check.activity.MainActivity;
 import com.xiao.nanshi_check.adapter.EquipmentRecylerAdapter;
 import com.xiao.nanshi_check.db.InspectionDevice;
 import com.xiao.nanshi_check.db.dao.InspectionDeviceDao;
@@ -68,21 +66,19 @@ public class EquipmentFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-//        (MainActivity)getActivity()
-
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab2);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "有木有用", Toast.LENGTH_SHORT).show();
-            }
-        });
         initData();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        beanList.clear();
+        dataDispose(JUDGE_QUERY_DELETE);
+        adapter.notifyDataSetChanged();//更新?
+    }
+
+
     private void initData() {
-
-
         beanList = new ArrayList<EquipmentBean>();
         dataDispose(JUDGE_QUERY_DELETE);
         adapter = new EquipmentRecylerAdapter(getActivity(), beanList);
@@ -172,10 +168,10 @@ public class EquipmentFragment extends Fragment {
     }
 
     public void add1() {
-        InspectionDeviceDao dao = new InspectionDeviceDao(getActivity());
-        for (int i = 0; i < 2; i++) {
-            dao.add("192.168.0." + i, "x62机床" + i);
-        }
+//        InspectionDeviceDao dao = new InspectionDeviceDao(getActivity());
+//        for (int i = 0; i < 2; i++) {
+//            dao.add("192.168.0." + i, "x62机床" + i);
+//        }
 //        adapter.notifyDataSetChanged();//更新?
 //        Toast.makeText(getActivity(), "设备管理 ", Toast.LENGTH_SHORT).show();
 //        Log.i("haha", "haha");

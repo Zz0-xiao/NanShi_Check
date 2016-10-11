@@ -2,7 +2,6 @@
 <manifest package="com.xiao.nanshi_check"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -22,14 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".activity.StudentManagementActivity"
-                  android:theme="@style/GeneralTheme">
+        <activity
+            android:name=".activity.StudentManagementActivity"
+            android:theme="@style/GeneralTheme">
+        </activity>
+        <activity android:name=".activity.AddEquipmentActivity">
         </activity>
     </application>
 

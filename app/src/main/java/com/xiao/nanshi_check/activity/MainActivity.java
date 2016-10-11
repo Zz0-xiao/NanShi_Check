@@ -65,28 +65,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initTabLayout();
 
         fab = (FloatingActionButton) findViewById(R.id.fab2);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Toast.makeText(MainActivity.this, "hahah " + tabLayout.getSelectedTabPosition(), Toast.LENGTH_SHORT).show();
-//                if (tabLayout.getSelectedTabPosition() == 1) {
-////                    Toast.makeText(MainActivity.this, "设备管理 ", Toast.LENGTH_SHORT).show();
-////                    EquipmentFragment ef = new EquipmentFragment();
-////                    ef.add1();
-//
-////                    InspectionDeviceDao dao = new InspectionDeviceDao(MainActivity.this);
-//////                    dao.add("192.168.0." , "x62机床"  );
-////                    for (int i = 0; i < 10; i++) {
-////                        int number = i;
-////                        dao.add("192.168.0." + number, "x62机床" + number);
-////                    }
-//
-//
-//                } else if (tabLayout.getSelectedTabPosition() == 2) {
-//                    Toast.makeText(MainActivity.this, "成绩 ", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "hahah " + tabLayout.getSelectedTabPosition(), Toast.LENGTH_SHORT).show();
+                if (tabLayout.getSelectedTabPosition() == 1) {
+                    startActivity(new Intent(MainActivity.this, AddEquipmentActivity.class));
+                } else if (tabLayout.getSelectedTabPosition() == 2) {
+                    Toast.makeText(MainActivity.this, "成绩 ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 /*
