@@ -146,9 +146,13 @@ public class EquipmentFragment extends Fragment {
             String equipmentIp = cursor.getString(1);
             String equipmentName = cursor.getString(2);
             EquipmentBean e = new EquipmentBean(equipmentIp, equipmentName);
-            if (position == -1) {
+
+
+            if (position == JUDGE_QUERY_DELETE) {
                 beanList.add(e);
             }
+
+
             if (deleteIp.equals(equipmentIp)) {
                 InspectionDeviceDao dao = new InspectionDeviceDao(getContext());
                 dao.delete(equipmentIp);

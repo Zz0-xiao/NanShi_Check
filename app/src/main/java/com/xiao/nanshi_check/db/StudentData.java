@@ -16,8 +16,8 @@ public class StudentData extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table studentdata (_id integer primary key ,name varchar(20),grade varchar(20),testScore varchar(20),testTime varchar(20),testDate varchar(20))");
     }
 
     @Override

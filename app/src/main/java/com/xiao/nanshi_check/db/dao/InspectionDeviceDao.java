@@ -73,27 +73,27 @@ public class InspectionDeviceDao {
         }
     }
 
-
-    /**
-     * 查询全部的黑名单号码
-     */
-    public List<EquipmentBean> findAll() {
-        // 得到可读的数据库
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.query("inspectiondevice", new String[]{"deviceip", "devicename"}, null, null, null, null, null);
-        List<EquipmentBean> EquipmentBeans = new ArrayList<EquipmentBean>();
-        while (cursor.moveToNext()) {
-            EquipmentBean eb = new EquipmentBean();
-            String deviceip = cursor.getString(0);
-            String devicename = cursor.getString(1);
-            eb.setEquipmentIp(deviceip);
-            eb.setEquipmentName(devicename);
-            EquipmentBeans.add(eb);
-        }
-        cursor.close();
-        db.close();
-        SystemClock.sleep(3000);
-        return EquipmentBeans;
-    }
+//
+//    /**
+//     *
+//     */
+//    public List<EquipmentBean> findAll() {
+//        // 得到可读的数据库
+//        SQLiteDatabase db = helper.getReadableDatabase();
+//        Cursor cursor = db.query("inspectiondevice", new String[]{"deviceip", "devicename"}, null, null, null, null, null);
+//        List<EquipmentBean> EquipmentBeans = new ArrayList<EquipmentBean>();
+//        while (cursor.moveToNext()) {
+//            EquipmentBean eb = new EquipmentBean();
+//            String deviceip = cursor.getString(0);
+//            String devicename = cursor.getString(1);
+//            eb.setEquipmentIp(deviceip);
+//            eb.setEquipmentName(devicename);
+//            EquipmentBeans.add(eb);
+//        }
+//        cursor.close();
+//        db.close();
+//        SystemClock.sleep(3000);
+//        return EquipmentBeans;
+//    }
 
 }

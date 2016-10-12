@@ -101,8 +101,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         tabLayout.setTabsFromPagerAdapter(fragmentAdapter);//给Tabs设置适配器
 
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
-
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);

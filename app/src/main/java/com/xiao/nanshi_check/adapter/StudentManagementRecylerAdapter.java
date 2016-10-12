@@ -23,8 +23,8 @@ public class StudentManagementRecylerAdapter extends RecyclerView.Adapter<Studen
     private Context context;
     private List<StudentsBean> list;
     private Resources res;
-    private OnItemClickListener listener;
-
+    private OnItemClickListener mOnItemClickListener = null;//点击;
+    public OnItemLongClickListener mOnLongItemClickListener = null;//长按
 
     public StudentManagementRecylerAdapter(Context context, List<StudentsBean> list) {
         this.context = context;
@@ -51,8 +51,17 @@ public class StudentManagementRecylerAdapter extends RecyclerView.Adapter<Studen
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != listener)
-                    listener.onItemClick(position, bean);
+                if (null != mOnItemClickListener)
+                    mOnItemClickListener.onItemClick(position, bean);
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mOnLongItemClickListener != null) {
+                    mOnLongItemClickListener.OnItemLongClick(position, bean);
+                }
+                return true;
             }
         });
     }
@@ -83,7 +92,12 @@ public class StudentManagementRecylerAdapter extends RecyclerView.Adapter<Studen
         void onItemClick(int position, Object object);
     }
 
-
+    /**
+     * 内部接口回调方法
+     */
+    public interface OnItemLongClickListener {
+        void OnItemLongClick(int position, Object object);
+    }
 
     /**
      * 设置监听方法
@@ -91,9 +105,16 @@ public class StudentManagementRecylerAdapter extends RecyclerView.Adapter<Studen
      * @param listener
      */
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+        this.mOnItemClickListener = listener;
     }
-
+    /**
+     * 设置监听方法
+     *
+     * @param listener
+     */
+    public void OnItemLongClickListener(OnItemLongClickListener listener) {
+        this.mOnLongItemClickListener = listener;
+    }
 }
 
 

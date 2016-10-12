@@ -4,9 +4,9 @@ package com.xiao.nanshi_check.model;
  * Created by zzzzz on 16/8/4/0004.
  */
 public class StudentsBean {
+    String id;
     String name;
     String grade;//年级
-    String id;
     String testScore;//分数
     String testTime;//考试时间
     String testDate;//考试日期
