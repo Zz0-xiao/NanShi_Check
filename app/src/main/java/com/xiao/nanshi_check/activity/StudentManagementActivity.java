@@ -42,6 +42,9 @@ public class StudentManagementActivity extends BaseActivity {
     private String id = "";
 
     public static final int JUDGE_QUERY_DELETE = -1;
+    private List<Boolean> listCheck;
+
+
 
     @Override
     protected int getContentView() {
@@ -85,53 +88,77 @@ public class StudentManagementActivity extends BaseActivity {
 //        }
         dataDispose(JUDGE_QUERY_DELETE);
 
-        adapter = new StudentManagementRecylerAdapter(StudentManagementActivity.this, studentsList);
+        adapter = new StudentManagementRecylerAdapter(StudentManagementActivity.this, studentsList,listCheck);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
+        adapter.setOnItemListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position, Object object) {
-//                startActivity(new Intent(getActivity(), TwoActivity.class));
-                Toast.makeText(StudentManagementActivity.this, "第" + position + "条被按下了", Toast.LENGTH_SHORT).show();
+            public void setOnItemClick(int position, boolean isCheck) {
+                listCheck.set(position, isCheck);
+            }
+
+            @Override
+            public boolean setOnItemLongClick(int position) {
+
+//                if (mCab == null)
+//                    mCab = new MaterialCab(MainActivity.this, R.id.cab_stub).setMenu(R.menu.menu_cab).start(MainActivity.this);
+//                else if (!mCab.isActive())
+//                    mCab.reset().setMenu(R.menu.menu_cab).start(MainActivity.this);
+                adapter.isShow = true;//长按改变checkbox显示状态
+
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+
+            @Override
+            public void setOnItemCheckedChanged(int position, boolean isCheck) {
+                listCheck.set(position,isCheck);
             }
         });
-
-        adapter.OnItemLongClickListener(new StudentManagementRecylerAdapter.OnItemLongClickListener() {//长按事件
-            @Override
-            public void OnItemLongClick(final int position, Object object) {
-//                Toast.makeText(getContext(), "第" + position + "长按", Toast.LENGTH_SHORT).show();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(StudentManagementActivity.this);
-                //设置图标
-//                builder.setIcon(android.R.drawable.alert_dark_frame);
-                //设置标题
-                builder.setTitle("删除学生");
-                //设置文本
-                builder.setMessage("确定删除该学生");
-
-                //设置确定按钮
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dataDispose(position);
-                        adapter.notifyDataSetChanged();//更新?
-                    }
-                });
-
-                //设置取消按钮
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
-                    }
-                });
-                //使用创建器,生成一个对话框对象
-                AlertDialog ad = builder.create();
-                ad.show();
-            }
-        });
+//        adapter.setOnItemClickListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, Object object) {
+////                startActivity(new Intent(getActivity(), TwoActivity.class));
+//                Toast.makeText(StudentManagementActivity.this, "第" + position + "条被按下了", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        adapter.OnItemLongClickListener(new StudentManagementRecylerAdapter.OnItemLongClickListener() {//长按事件
+//            @Override
+//            public void OnItemLongClick(final int position, Object object) {
+////                Toast.makeText(getContext(), "第" + position + "长按", Toast.LENGTH_SHORT).show();
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(StudentManagementActivity.this);
+//                //设置图标
+////                builder.setIcon(android.R.drawable.alert_dark_frame);
+//                //设置标题
+//                builder.setTitle("删除学生");
+//                //设置文本
+//                builder.setMessage("确定删除该学生");
+//
+//                //设置确定按钮
+//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dataDispose(position);
+//                        adapter.notifyDataSetChanged();//更新?
+//                    }
+//                });
+//
+//                //设置取消按钮
+//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+////                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//                //使用创建器,生成一个对话框对象
+//                AlertDialog ad = builder.create();
+//                ad.show();
+//            }
+//        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +175,9 @@ public class StudentManagementActivity extends BaseActivity {
             }
         });
     }
+
+
+
 
     private void dataDispose(int position) {
 
@@ -179,7 +209,7 @@ public class StudentManagementActivity extends BaseActivity {
 
 
             if (id.equals(_id)) {
-                InspectionDeviceDao dao = new InspectionDeviceDao(StudentManagementActivity.this);
+                StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
                 dao.delete(id);
 //                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
                 Iterator<StudentsBean> sListIterator = studentsList.iterator();
