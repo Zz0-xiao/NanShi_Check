@@ -27,10 +27,14 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.StudentManagementActivity"
-            android:theme="@style/GeneralTheme">
+            android:theme="@style/GeneralTheme"
+           >
         </activity>
         <activity android:name=".activity.AddEquipmentActivity">
         </activity>
     </application>
 
 </manifest>
+
+
+    <!--android:theme="@style/GeneralTheme"-->

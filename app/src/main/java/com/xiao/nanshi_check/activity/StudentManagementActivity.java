@@ -1,37 +1,33 @@
 package com.xiao.nanshi_check.activity;
 
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
-
-import com.xiao.nanshi_check.adapter.EquipmentRecylerAdapter;
 import com.xiao.nanshi_check.adapter.StudentManagementRecylerAdapter;
-import com.xiao.nanshi_check.behavior.ScaleDownShowBehavior;
-import com.xiao.nanshi_check.db.InspectionDevice;
 import com.xiao.nanshi_check.db.StudentData;
-import com.xiao.nanshi_check.db.dao.InspectionDeviceDao;
 import com.xiao.nanshi_check.db.dao.StuidentDataDao;
-import com.xiao.nanshi_check.model.EquipmentBean;
 import com.xiao.nanshi_check.model.StudentsBean;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-public class StudentManagementActivity extends BaseActivity {
+public class StudentManagementActivity extends BaseActivity implements ActionMode.Callback {
+
     //    private View view;
     private RecyclerView recyclerView;
     private Toolbar toolbar;
@@ -42,9 +38,9 @@ public class StudentManagementActivity extends BaseActivity {
     private String id = "";
 
     public static final int JUDGE_QUERY_DELETE = -1;
-    private List<Boolean> listCheck;
 
-
+    private ActionMode actionMode;//多选删除用
+    public  static Set<Integer> positionSet = new HashSet<>();;//保存RecyclerView的所点击的item的位置
 
     @Override
     protected int getContentView() {
@@ -65,9 +61,6 @@ public class StudentManagementActivity extends BaseActivity {
         initRecyclerView();
         initData();
 
-        /*ScaleDownShowBehavior scaleDownShowFab = ScaleDownShowBehavior.from(fab);
-        scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);
-*/
     }
 
     private void initRecyclerView() {
@@ -79,6 +72,10 @@ public class StudentManagementActivity extends BaseActivity {
 
     private void initData() {
         studentsList = new ArrayList<StudentsBean>();
+
+        //保存RecyclerView的所点击的item的位置
+//        positionSet = new HashSet<>();
+
 //        for (int i = 0; i < 50; i++) {
 //            StudentsBean bean = new StudentsBean();
 //            bean.setId("" + i);
@@ -88,84 +85,37 @@ public class StudentManagementActivity extends BaseActivity {
 //        }
         dataDispose(JUDGE_QUERY_DELETE);
 
-        adapter = new StudentManagementRecylerAdapter(StudentManagementActivity.this, studentsList,listCheck);
+        adapter = new StudentManagementRecylerAdapter(StudentManagementActivity.this, studentsList);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
             @Override
-            public void setOnItemClick(int position, boolean isCheck) {
-                listCheck.set(position, isCheck);
+            public void onItemClick(View view, int position) {
+                if (actionMode != null) {
+                    // 如果当前处于多选状态，则进入多选状态的逻辑
+                    // 维护当前已选的position
+                    addOrRemove(position);
+                } else {
+                    // 如果不是多选状态，则进入点击事件的业务逻辑
+                    // TODO something
+                }
             }
 
             @Override
-            public boolean setOnItemLongClick(int position) {
-
-//                if (mCab == null)
-//                    mCab = new MaterialCab(MainActivity.this, R.id.cab_stub).setMenu(R.menu.menu_cab).start(MainActivity.this);
-//                else if (!mCab.isActive())
-//                    mCab.reset().setMenu(R.menu.menu_cab).start(MainActivity.this);
-                adapter.isShow = true;//长按改变checkbox显示状态
-
-                adapter.notifyDataSetChanged();
-                return true;
-            }
-
-            @Override
-            public void setOnItemCheckedChanged(int position, boolean isCheck) {
-                listCheck.set(position,isCheck);
+            public void onItemLongClick(View view, int position) {
+                if (actionMode == null) {
+                    actionMode = startSupportActionMode(StudentManagementActivity.this);
+                }
             }
         });
-//        adapter.setOnItemClickListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position, Object object) {
-////                startActivity(new Intent(getActivity(), TwoActivity.class));
-//                Toast.makeText(StudentManagementActivity.this, "第" + position + "条被按下了", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        adapter.OnItemLongClickListener(new StudentManagementRecylerAdapter.OnItemLongClickListener() {//长按事件
-//            @Override
-//            public void OnItemLongClick(final int position, Object object) {
-////                Toast.makeText(getContext(), "第" + position + "长按", Toast.LENGTH_SHORT).show();
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(StudentManagementActivity.this);
-//                //设置图标
-////                builder.setIcon(android.R.drawable.alert_dark_frame);
-//                //设置标题
-//                builder.setTitle("删除学生");
-//                //设置文本
-//                builder.setMessage("确定删除该学生");
-//
-//                //设置确定按钮
-//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dataDispose(position);
-//                        adapter.notifyDataSetChanged();//更新?
-//                    }
-//                });
-//
-//                //设置取消按钮
-//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-////                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//                //使用创建器,生成一个对话框对象
-//                AlertDialog ad = builder.create();
-//                ad.show();
-//            }
-//        });
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(StudentManagementActivity.this, "添加学生和导入", Toast.LENGTH_SHORT).show();
                 StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 20; i++) {
                     dao.add("0091" + i, "张三" + i, "机电" + i);
                 }
 
@@ -176,7 +126,24 @@ public class StudentManagementActivity extends BaseActivity {
         });
     }
 
-
+    private void addOrRemove(int position) {
+        if (positionSet.contains(position)) {
+            // 如果包含，则撤销选择
+            positionSet.remove(position);
+        } else {
+            // 如果不包含，则添加
+            positionSet.add(position);
+        }
+        if (positionSet.size() == 0) {
+            // 如果没有选中任何的item，则退出多选模式
+            actionMode.finish();
+        } else {
+            // 设置ActionMode标题
+            actionMode.setTitle(positionSet.size() + " 已选择");
+            // 更新列表界面，否则无法显示已选的item
+            adapter.notifyDataSetChanged();
+        }
+    }
 
 
     private void dataDispose(int position) {
@@ -227,13 +194,6 @@ public class StudentManagementActivity extends BaseActivity {
         }
     }
 
-/*    private ScaleDownShowBehavior.OnStateChangedListener onStateChangedListener = new ScaleDownShowBehavior.OnStateChangedListener() {
-        @Override
-        public void onChanged(boolean isShow) {
-
-        }
-    };*/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -254,4 +214,98 @@ public class StudentManagementActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        if (actionMode == null) {
+            actionMode = mode;
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.menu_delete, menu);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_delete:
+                // 删除已选
+                Set<StudentsBean> valueSet = new HashSet<>();
+                for (int position : positionSet) {
+                    valueSet.add(adapter.getItem(position));
+                }
+                for (StudentsBean val : valueSet) {
+                    adapter.remove(val);
+                }
+                mode.finish();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        actionMode = null;
+        positionSet.clear();
+        adapter.notifyDataSetChanged();
+    }
 }
+
+
+
+
+
+
+    /*        adapter.setOnItemClickListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, Object object) {
+//                startActivity(new Intent(getActivity(), TwoActivity.class));
+                Toast.makeText(StudentManagementActivity.this, "第" + position + "条被按下了", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        adapter.OnItemLongClickListener(new StudentManagementRecylerAdapter.OnItemLongClickListener() {//长按事件
+            @Override
+            public void OnItemLongClick(final int position, Object object) {
+//                Toast.makeText(getContext(), "第" + position + "长按", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(StudentManagementActivity.this);
+                //设置图标
+//                builder.setIcon(android.R.drawable.alert_dark_frame);
+                //设置标题
+                builder.setTitle("删除学生");
+                //设置文本
+                builder.setMessage("确定删除该学生");
+
+                //设置确定按钮
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dataDispose(position);
+                        adapter.notifyDataSetChanged();//更新?
+                    }
+                });
+
+                //设置取消按钮
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
+                    }
+                });
+                //使用创建器,生成一个对话框对象
+                AlertDialog ad = builder.create();
+                ad.show();
+            }
+        });*/

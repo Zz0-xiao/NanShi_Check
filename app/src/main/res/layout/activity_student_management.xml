@@ -5,7 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xiao.nanshi_check.activity.StudentManagementActivity">
+    tools:context="com.xiao.nanshi_check.activity.StudentManagementActivity"
+    android:fitsSystemWindows="false"
+    android:clipToPadding="false"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -20,7 +23,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -79,7 +82,8 @@
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="26dp"
         android:layout_marginRight="20dp"
-        android:backgroundTint="@color/accent_material_dark"
+
+        android:backgroundTint="@color/colorPrimary"
         android:src="@mipmap/pointer_crosshair_large"
         app:borderWidth="0dp"
 

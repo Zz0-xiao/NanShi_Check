@@ -1,29 +1,58 @@
 <resources>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="windowActionModeOverlay">true</item><!--ActionMode  多选状态栏覆盖toolbar-->
+        <item name="windowActionBarOverlay">true</item><!--ActionMode  多选状态栏覆盖toolbar-->
+
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+
     </style>
 
     <style name="GeneralTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css"><!-- Customize your theme here. -->
         <!--导航栏底色-->
-        <item name="colorPrimary">@color/accent_material_dark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <!--状态栏底色-->
-        <item name="colorPrimaryDark">@color/accent_material_light</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!--导航栏上的标题颜色-->
         <item name="android:textColorPrimary">@android:color/black</item>
         <!--Activity窗口的颜色-->
         <item name="android:windowBackground">@android:color/white</item>
         <!--按钮选中或者点击获得焦点后的颜色-->
-        <item name="colorAccent">#00ff00</item>
-        <!--和 colorAccent相反，正常状态下按钮的颜色-->
+        <item name="colorAccent">#00ffff</item>
+        <!-- 和 colorAccent相反，正常状态下按钮的颜色-->
         <item name="colorControlNormal">#ff0000</item>
         <!--Button按钮正常状态颜色-->
         <item name="colorButtonNormal">@color/accent_material_light</item>
         <!--EditText 输入框中字体的颜色-->
         <item name="editTextColor">@android:color/white</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item><!--ActionMode  -->
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item><!--ActionMode  多选状态栏颜色-->
+
+        <item name="android:actionModeBackground">@color/colorPrimary</item><!--ActionMode  多选栏颜色-->
+
     </style>
+
+   <!-- <style name="ActionMode">
+      &lt;!&ndash;  <item name="android:background">?android:attr/actionModeBackground</item>
+        <item name="android:backgroundSplit">?android:attr/actionModeSplitBackground</item>
+        <item name="android:height">?android:attr/actionBarSize</item>
+        <item name="android:titleTextStyle">@android:style/TextAppearance.Widget.ActionMode.Title</item>
+        <item name="android:subtitleTextStyle">@android:style/TextAppearance.Widget.ActionMode.Subtitle</item>&ndash;&gt;
+
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>&lt;!&ndash;ActionMode  多选状态栏覆盖toolbar&ndash;&gt;
+        <item name="android:statusBarColor">@android:color/transparent</item>&lt;!&ndash;ActionMode  多选状态栏颜色透明&ndash;&gt;
+    </style>-->
+
 
 </resources>

@@ -8,6 +8,104 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="GeneralTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css"><!-- Customize your theme here. -->
+        <!--导航栏底色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--状态栏底色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--导航栏上的标题颜色-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--Activity窗口的颜色-->
+        <item name="android:windowBackground">@android:color/white</item>
+        <!--按钮选中或者点击获得焦点后的颜色-->
+        <item name="colorAccent">#00ffff</item>
+        <!-- 和 colorAccent相反，正常状态下按钮的颜色-->
+        <item name="colorControlNormal">#ff0000</item>
+        <!--Button按钮正常状态颜色-->
+        <item name="colorButtonNormal">@color/accent_material_light</item>
+        <!--EditText 输入框中字体的颜色-->
+        <item name="editTextColor">@android:color/white</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+
+
+        <item name="android:actionModeBackground">@color/colorPrimary</item><!--ActionMode  多选栏颜色-->
+
+    </style>
+<!--
+    <style name="GeneralTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css">&lt;!&ndash; Customize your theme here. &ndash;&gt;
+        &lt;!&ndash;导航栏底色&ndash;&gt;
+        <item name="colorPrimary">@color/colorPrimary</item>
+        &lt;!&ndash;状态栏底色&ndash;&gt;
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        &lt;!&ndash;导航栏上的标题颜色&ndash;&gt;
+        <item name="android:textColorPrimary">@android:color/black</item>
+        &lt;!&ndash;Activity窗口的颜色&ndash;&gt;
+        <item name="android:windowBackground">@android:color/white</item>
+        &lt;!&ndash;按钮选中或者点击获得焦点后的颜色&ndash;&gt;
+        <item name="colorAccent">#00ff00</item>
+       &lt;!&ndash; 和 colorAccent相反，正常状态下按钮的颜色&ndash;&gt;
+        <item name="colorControlNormal">#ff0000</item>
+        &lt;!&ndash;Button按钮正常状态颜色&ndash;&gt;
+        <item name="colorButtonNormal">@color/accent_material_light</item>
+        &lt;!&ndash;EditText 输入框中字体的颜色&ndash;&gt;
+        <item name="editTextColor">@android:color/white</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+    </style>-->
+
+<!--
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>-->
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+    <!-- <style name="AppTheme.NoActionBar">
+         <item name="windowActionBar">false</item>
+         <item name="windowNoTitle">true</item>
+
+         <item name="windowActionModeOverlay">true</item>
+         <item name="windowActionBarOverlay">true</item>
+
+     </style>
+
+     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+     <style name="Base.Widget.AppCompat.ActionMode" parent="">
+         <item name="background">@color/colorPrimaryDark</item>
+         <item name="height">?attr/actionBarSize</item>
+     </style>-->
+
+    <!--
+        <style name="AppTheme.Parent" parent="Theme.AppCompat">
+            <item name="windowActionModeOverlay">true</item>
+            <item name="windowActionBarOverlay">true</item>
+            <item name="windowNoTitle">true</item>
+            <item name="windowActionBar">false</item>
+        </style>-->
+
+    <!--  <style name="CustomActionMode" parent="@style/Widget.AppCompat.ActionMode">
+          <item name="background">@color/colorPrimary</item>
+          <item name="height">80dp</item>
+      </style>-->
+
+
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css">&lt;!&ndash; Customize your theme here. &ndash;&gt;
         &lt;!&ndash;导航栏底色&ndash;&gt;
         <item name="colorPrimary">@color/accent_material_dark</item>
@@ -26,37 +124,33 @@
         &lt;!&ndash;EditText 输入框中字体的颜色&ndash;&gt;
         <item name="editTextColor">@android:color/white</item>
     </style>-->
-
-    <style name="GeneralTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css"><!-- Customize your theme here. -->
-        <!--导航栏底色-->
+<!--
+    <style name="GeneralTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css">&lt;!&ndash; Customize your theme here. &ndash;&gt;
+        &lt;!&ndash;导航栏底色&ndash;&gt;
         <item name="colorPrimary">@color/accent_material_dark</item>
-        <!--状态栏底色-->
+        &lt;!&ndash;状态栏底色&ndash;&gt;
         <item name="colorPrimaryDark">@color/accent_material_light</item>
-        <!--导航栏上的标题颜色-->
+        &lt;!&ndash;导航栏上的标题颜色&ndash;&gt;
         <item name="android:textColorPrimary">@android:color/black</item>
-        <!--Activity窗口的颜色-->
+        &lt;!&ndash;Activity窗口的颜色&ndash;&gt;
         <item name="android:windowBackground">@android:color/white</item>
-        <!--按钮选中或者点击获得焦点后的颜色-->
+        &lt;!&ndash;按钮选中或者点击获得焦点后的颜色&ndash;&gt;
         <item name="colorAccent">#00ff00</item>
-        <!--和 colorAccent相反，正常状态下按钮的颜色-->
+        &lt;!&ndash;和 colorAccent相反，正常状态下按钮的颜色&ndash;&gt;
         <item name="colorControlNormal">#ff0000</item>
-        <!--Button按钮正常状态颜色-->
+        &lt;!&ndash;Button按钮正常状态颜色&ndash;&gt;
         <item name="colorButtonNormal">@color/accent_material_light</item>
-        <!--EditText 输入框中字体的颜色-->
+        &lt;!&ndash;EditText 输入框中字体的颜色&ndash;&gt;
         <item name="editTextColor">@android:color/white</item>
-    </style>
 
 
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-
+-->
 
 </resources>
