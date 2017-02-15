@@ -1,5 +1,6 @@
 package com.xiao.nanshi_check.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,7 +42,9 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
     public static final int JUDGE_QUERY_DELETE = -1;
 
     private ActionMode actionMode;//多选删除用
-    public  static Set<Integer> positionSet = new HashSet<>();;//保存RecyclerView的所点击的item的位置
+    //    public static Set<Integer> positionSet = new HashSet<>();
+    public static Set<Integer> positionSet = new HashSet<>();//记录要删除的选项
+    ;//保存RecyclerView的所点击的item的位置
 
     @Override
     protected int getContentView() {
@@ -98,6 +102,7 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
                 } else {
                     // 如果不是多选状态，则进入点击事件的业务逻辑
                     // TODO something
+                    Toast.makeText(StudentManagementActivity.this, "第" + position + "条", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -113,12 +118,12 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(StudentManagementActivity.this, "添加学生和导入", Toast.LENGTH_SHORT).show();
-                StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
-                for (int i = 0; i < 20; i++) {
-                    dao.add("0091" + i, "张三" + i, "机电" + i);
-                }
-
+//                Toast.makeText(StudentManagementActivity.this, "添加学生和导入", Toast.LENGTH_SHORT).show();
+//                StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
+//                for (int i = 0; i < 20; i++) {
+//                    dao.add("0091" + i, "张三" + i, "机电" + i);
+//                }
+                startActivity(new Intent(StudentManagementActivity.this, AddStudentActivity.class));
                 studentsList.clear();
                 dataDispose(JUDGE_QUERY_DELETE);
                 adapter.notifyDataSetChanged();//更新?
@@ -172,10 +177,7 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
 
             if (position == JUDGE_QUERY_DELETE) {
                 studentsList.add(sd);
-            }
-
-
-            if (id.equals(_id)) {
+            } else if (id.equals(_id)) {
                 StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
                 dao.delete(id);
 //                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
@@ -238,12 +240,24 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
         switch (item.getItemId()) {
             case R.id.menu_delete:
                 // 删除已选
-                Set<StudentsBean> valueSet = new HashSet<>();
+                ArrayList<StudentsBean> deleteList = new ArrayList<>();
                 for (int position : positionSet) {
-                    valueSet.add(adapter.getItem(position));
+                    deleteList.add(adapter.getItem(position));
                 }
-                for (StudentsBean val : valueSet) {
-                    adapter.remove(val);
+//                for (int i = 0; i < positionSet.size(); i++) {
+//                    valueSet.add(adapter.getItem(i));
+////                    int position = adapter.getItemCount();
+////                    Log.i("hahahah", position + "");
+//                }
+
+//                for (StudentsBean val : delete) {
+//                    adapter.remove(val);
+//                }
+                for (int i = 0; i < deleteList.size(); i++) {
+                    StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
+                    dao.delete(deleteList.get(i).getId().toString());
+                    Log.i("hahahah", deleteList.get(i).getId().toString() + "");
+                    adapter.remove(deleteList.get(i));
                 }
                 mode.finish();
                 return true;
@@ -252,15 +266,20 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
         }
     }
 
+
     @Override
     public void onDestroyActionMode(ActionMode mode) {
         actionMode = null;
         positionSet.clear();
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onResume() {
+        initData();
+        super.onResume();
+    }
 }
-
-
 
 
 

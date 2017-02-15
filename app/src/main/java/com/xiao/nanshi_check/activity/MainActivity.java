@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private TabLayout tabLayout;
     private String[] tab_names;
 
-
     private FloatingActionButton fab;////
 
     @Override

@@ -16,11 +16,6 @@ public class AddEquipmentActivity extends BaseActivity {
     private EditText addName;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected int getContentView() {
         return R.layout.activity_add_equipment;
     }
@@ -34,7 +29,7 @@ public class AddEquipmentActivity extends BaseActivity {
         addName.setText("x62机床");
     }
 
-    public void onClickAdd(View v) {
+        public void onClickAdd(View v) {
 
         InspectionDeviceDao dao = new InspectionDeviceDao(AddEquipmentActivity.this);
         dao.add(addIp.getText() + "", addName.getText() + "");

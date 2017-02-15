@@ -33,7 +33,6 @@ public class EquipmentFragment extends Fragment {
     public static final int JUDGE_QUERY_DELETE = -1;
     //设备管理
     private View view;
-    //    private String content;
     private RecyclerView recyclerView;
     private List<EquipmentBean> beanList;
     private EquipmentRecylerAdapter adapter;
@@ -42,14 +41,9 @@ public class EquipmentFragment extends Fragment {
 //    Context context;
 //    private InspectionDeviceDao dao;
 
-
     public EquipmentFragment() {
         // Required empty public constructor
     }
-
-//    public EquipmentFragment(Context context1) {
-//        context = context1;
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,8 +116,7 @@ public class EquipmentFragment extends Fragment {
                     }
                 });
                 //使用创建器,生成一个对话框对象
-                AlertDialog ad = builder.create();
-                ad.show();
+                builder.create().show();
             }
         });
     }
@@ -147,13 +140,9 @@ public class EquipmentFragment extends Fragment {
             String equipmentName = cursor.getString(2);
             EquipmentBean e = new EquipmentBean(equipmentIp, equipmentName);
 
-
             if (position == JUDGE_QUERY_DELETE) {
                 beanList.add(e);
-            }
-
-
-            if (deleteIp.equals(equipmentIp)) {
+            } else if (deleteIp.equals(equipmentIp)) {
                 InspectionDeviceDao dao = new InspectionDeviceDao(getContext());
                 dao.delete(equipmentIp);
 //                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
