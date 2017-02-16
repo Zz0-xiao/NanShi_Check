@@ -24,25 +24,19 @@ import com.xiao.nanshi_check.model.StudentsBean;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class StudentManagementActivity extends BaseActivity implements ActionMode.Callback {
 
-    //    private View view;
     private RecyclerView recyclerView;
     private Toolbar toolbar;
-    private List<StudentsBean> studentsList;
+    private List<StudentsBean> studentsList = new ArrayList<StudentsBean>();
     private StudentManagementRecylerAdapter adapter;
 
     private FloatingActionButton fab;
-    private String id = "";
-
-    public static final int JUDGE_QUERY_DELETE = -1;
 
     private ActionMode actionMode;//多选删除用
-    //    public static Set<Integer> positionSet = new HashSet<>();
     public static Set<Integer> positionSet = new HashSet<>();//记录要删除的选项
     ;//保存RecyclerView的所点击的item的位置
 
@@ -64,7 +58,6 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
 
         initRecyclerView();
         initData();
-
     }
 
     private void initRecyclerView() {
@@ -75,11 +68,9 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
     }
 
     private void initData() {
-        studentsList = new ArrayList<StudentsBean>();
 
         //保存RecyclerView的所点击的item的位置
 //        positionSet = new HashSet<>();
-
 //        for (int i = 0; i < 50; i++) {
 //            StudentsBean bean = new StudentsBean();
 //            bean.setId("" + i);
@@ -87,7 +78,7 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
 //            bean.setName("张三" + i);
 //            studentsList.add(bean);
 //        }
-        dataDispose(JUDGE_QUERY_DELETE);
+        queryAddData();
 
         adapter = new StudentManagementRecylerAdapter(StudentManagementActivity.this, studentsList);
         recyclerView.setAdapter(adapter);
@@ -114,19 +105,19 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
             }
         });
 
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(StudentManagementActivity.this, AddStudentActivity.class));
 //                Toast.makeText(StudentManagementActivity.this, "添加学生和导入", Toast.LENGTH_SHORT).show();
 //                StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
 //                for (int i = 0; i < 20; i++) {
 //                    dao.add("0091" + i, "张三" + i, "机电" + i);
 //                }
-                startActivity(new Intent(StudentManagementActivity.this, AddStudentActivity.class));
-                studentsList.clear();
-                dataDispose(JUDGE_QUERY_DELETE);
-                adapter.notifyDataSetChanged();//更新?
+
+//                studentsList.clear();
+//                dataDispose(JUDGE_QUERY_DELETE);
+//                adapter.notifyDataSetChanged();//更新?
             }
         });
     }
@@ -151,15 +142,12 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
     }
 
 
-    private void dataDispose(int position) {
-
-
-        if (position == JUDGE_QUERY_DELETE) {
-            id = "";
-        } else {
-            id = studentsList.get(position).getId().toString();
-        }
-
+    private void queryAddData() {
+//       if (position == JUDGE_QUERY_DELETE) {
+//            id = "";
+//        } else {
+//            id = studentsList.get(position).getId().toString();
+//        }
 
         //创建一个帮助类对象
         StudentData StudentData = new StudentData(StudentManagementActivity.this);
@@ -175,24 +163,25 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
             sd.setName(name);
             sd.setGrade(grade);
 
-            if (position == JUDGE_QUERY_DELETE) {
-                studentsList.add(sd);
-            } else if (id.equals(_id)) {
-                StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
-                dao.delete(id);
-//                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
-                Iterator<StudentsBean> sListIterator = studentsList.iterator();
-                /*arraylist 删除东西**********************************************************************/
-                while (sListIterator.hasNext()) {
-                    StudentsBean b = sListIterator.next();
-                    String c = b.getId().toString();
-                    if (c.equals(id)) {
-                        sListIterator.remove();
-                    }
-                }
+            studentsList.add(sd);
+//            if (position == JUDGE_QUERY_DELETE) {
+//                studentsList.add(sd);
+//            }
+//            else if (id.equals(_id)) {
+//                StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
+//                dao.delete(id);
+//              Log.i("", "删除前:" + beanList.size() + ":" + beanList);
+//                Iterator<StudentsBean> sListIterator = studentsList.iterator();
+//                //arraylist 删除东西**********************************************************************/
+//                while (sListIterator.hasNext()) {
+//                    StudentsBean b = sListIterator.next();
+//                    String c = b.getId().toString();
+//                    if (c.equals(id)) {
+//                        sListIterator.remove();
+//                    }
+//                }
 //                Log.i("", "删除后集合的长度为:" + beanList.size() + ":" + beanList);
-            }
-
+//            }
         }
     }
 
@@ -249,14 +238,13 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
 ////                    int position = adapter.getItemCount();
 ////                    Log.i("hahahah", position + "");
 //                }
-
 //                for (StudentsBean val : delete) {
 //                    adapter.remove(val);
 //                }
                 for (int i = 0; i < deleteList.size(); i++) {
                     StuidentDataDao dao = new StuidentDataDao(StudentManagementActivity.this);
                     dao.delete(deleteList.get(i).getId().toString());
-                    Log.i("hahahah", deleteList.get(i).getId().toString() + "");
+//                    Log.i("hahahah", deleteList.get(i).getId().toString() + "");
                     adapter.remove(deleteList.get(i));
                 }
                 mode.finish();
@@ -265,7 +253,6 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
                 return false;
         }
     }
-
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
@@ -276,55 +263,55 @@ public class StudentManagementActivity extends BaseActivity implements ActionMod
 
     @Override
     protected void onResume() {
-        initData();
+        studentsList.clear();
+        queryAddData();
+        adapter.notifyDataSetChanged();
         super.onResume();
     }
 }
 
 
-
-
-    /*        adapter.setOnItemClickListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, Object object) {
-//                startActivity(new Intent(getActivity(), TwoActivity.class));
-                Toast.makeText(StudentManagementActivity.this, "第" + position + "条被按下了", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        adapter.OnItemLongClickListener(new StudentManagementRecylerAdapter.OnItemLongClickListener() {//长按事件
-            @Override
-            public void OnItemLongClick(final int position, Object object) {
-//                Toast.makeText(getContext(), "第" + position + "长按", Toast.LENGTH_SHORT).show();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(StudentManagementActivity.this);
-                //设置图标
-//                builder.setIcon(android.R.drawable.alert_dark_frame);
-                //设置标题
-                builder.setTitle("删除学生");
-                //设置文本
-                builder.setMessage("确定删除该学生");
-
-                //设置确定按钮
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dataDispose(position);
-                        adapter.notifyDataSetChanged();//更新?
-                    }
-                });
-
-                //设置取消按钮
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
-                    }
-                });
-                //使用创建器,生成一个对话框对象
-                AlertDialog ad = builder.create();
-                ad.show();
-            }
-        });*/
+//            adapter.setOnItemClickListener(new StudentManagementRecylerAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, Object object) {
+////                startActivity(new Intent(getActivity(), TwoActivity.class));
+//                Toast.makeText(StudentManagementActivity.this, "第" + position + "条被按下了", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        adapter.OnItemLongClickListener(new StudentManagementRecylerAdapter.OnItemLongClickListener() {//长按事件
+//            @Override
+//            public void OnItemLongClick(final int position, Object object) {
+////                Toast.makeText(getContext(), "第" + position + "长按", Toast.LENGTH_SHORT).show();
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(StudentManagementActivity.this);
+//                //设置图标
+////                builder.setIcon(android.R.drawable.alert_dark_frame);
+//                //设置标题
+//                builder.setTitle("删除学生");
+//                //设置文本
+//                builder.setMessage("确定删除该学生");
+//
+//                //设置确定按钮
+//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dataDispose(position);
+//                        adapter.notifyDataSetChanged();//更新?
+//                    }
+//                });
+//
+//                //设置取消按钮
+//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+////                        Toast.makeText(getContext(), "8888", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//                //使用创建器,生成一个对话框对象
+//                AlertDialog ad = builder.create();
+//                ad.show();
+//            }
+//        });

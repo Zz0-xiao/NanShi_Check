@@ -86,6 +86,14 @@ public class EquipmentRecylerAdapter extends RecyclerView.Adapter<EquipmentRecyl
         }
     }
 
+    public void remove(EquipmentBean str) {
+        list.remove(str);
+        notifyDataSetChanged();
+    }
+
+    public EquipmentBean getItem(int pos) {
+        return list.get(pos);
+    }
 
     /**
      * 内部接口回调方法

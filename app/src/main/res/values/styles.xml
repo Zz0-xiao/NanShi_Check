@@ -8,6 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar" >
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="windowActionModeOverlay">true</item><!--ActionMode  多选状态栏覆盖toolbar-->
+        <item name="windowActionBarOverlay">true</item><!--ActionMode  多选状态栏覆盖toolbar-->
+
+
+    </style>
+
     <style name="GeneralTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css"><!-- Customize your theme here. -->
         <!--导航栏底色-->
         <item name="colorPrimary">@color/colorPrimary</item>

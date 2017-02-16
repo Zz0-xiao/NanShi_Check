@@ -20,11 +20,14 @@ import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.EquipmentRecylerAdapter;
 import com.xiao.nanshi_check.db.InspectionDevice;
 import com.xiao.nanshi_check.db.dao.InspectionDeviceDao;
+import com.xiao.nanshi_check.db.dao.StuidentDataDao;
 import com.xiao.nanshi_check.model.EquipmentBean;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.xiao.nanshi_check.activity.StudentManagementActivity.positionSet;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,16 +37,9 @@ public class EquipmentFragment extends Fragment {
     //设备管理
     private View view;
     private RecyclerView recyclerView;
-    private List<EquipmentBean> beanList;
     private EquipmentRecylerAdapter adapter;
+    private ArrayList<EquipmentBean> beanList = new ArrayList<EquipmentBean>();
 
-    private String deleteIp = "";
-//    Context context;
-//    private InspectionDeviceDao dao;
-
-    public EquipmentFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,26 +51,19 @@ public class EquipmentFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        content = getArguments().getString("content");
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        initRecyclerView();
         initData();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        beanList.clear();
-        dataDispose(JUDGE_QUERY_DELETE);
-        adapter.notifyDataSetChanged();//更新?
+    private void initRecyclerView() {
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
 
     private void initData() {
-        beanList = new ArrayList<EquipmentBean>();
-        dataDispose(JUDGE_QUERY_DELETE);
+        queryAddData();
         adapter = new EquipmentRecylerAdapter(getActivity(), beanList);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new EquipmentRecylerAdapter.OnItemClickListener() {
@@ -87,8 +76,6 @@ public class EquipmentFragment extends Fragment {
         adapter.OnItemLongClickListener(new EquipmentRecylerAdapter.OnItemLongClickListener() {//长按事件
             @Override
             public void OnItemLongClick(final int position, Object object) {
-//                Toast.makeText(getContext(), "第" + position + "长按", Toast.LENGTH_SHORT).show();
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 //设置图标
 //                builder.setIcon(android.R.drawable.alert_dark_frame);
@@ -96,14 +83,33 @@ public class EquipmentFragment extends Fragment {
                 builder.setTitle("删除设备");
                 //设置文本
                 builder.setMessage("确定删除该设备");
-
                 //设置确定按钮
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dataDispose(position);
+
+                        ArrayList<EquipmentBean> deleteList = beanList;
+//                        Log.i("hhhhh", "" + deleteList.get(position));
+
+                        InspectionDeviceDao dao = new InspectionDeviceDao(getContext());
+                        dao.delete(deleteList.get(position).getEquipmentIp().toString());
+
+                        adapter.remove(deleteList.get(position));
+
+//                        for (int position : positionSet) {
+//                            deleteList.add(adapter.getItem(position));
+//                        }
+//                        for (int i = 0; i < beanList.size(); i++) {
+//                            deleteList.add(adapter.getItem(i));
+//                        }
+//                        for (int i = 0; i < deleteList.size(); i++) {
+//                            Log.i("hhhhh", "" + deleteList.get(i));
+//                        }
+//                        beanList.clear();
+//                          deleteList.clear();
+//                        queryAddData();
                         adapter.notifyDataSetChanged();//更新?
+
                     }
                 });
 
@@ -121,13 +127,13 @@ public class EquipmentFragment extends Fragment {
         });
     }
 
-    private void dataDispose(int position) {
-
-        if (position == JUDGE_QUERY_DELETE) {
-            deleteIp = "";
-        } else {
-            deleteIp = beanList.get(position).getEquipmentIp().toString();
-        }
+    private void queryAddData() {
+//
+//        if (position == JUDGE_QUERY_DELETE) {
+//            deleteIp = "";
+//        } else {
+//            deleteIp = beanList.get(position).getEquipmentIp().toString();
+//        }
 
         //创建一个帮助类对象
         InspectionDevice inspectionDevice = new InspectionDevice(getContext());
@@ -140,25 +146,35 @@ public class EquipmentFragment extends Fragment {
             String equipmentName = cursor.getString(2);
             EquipmentBean e = new EquipmentBean(equipmentIp, equipmentName);
 
-            if (position == JUDGE_QUERY_DELETE) {
-                beanList.add(e);
-            } else if (deleteIp.equals(equipmentIp)) {
-                InspectionDeviceDao dao = new InspectionDeviceDao(getContext());
-                dao.delete(equipmentIp);
-//                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
-                Iterator<EquipmentBean> sListIterator = beanList.iterator();
-                /*arraylist 删除东西**********************************************************************/
-                while (sListIterator.hasNext()) {
-                    EquipmentBean b = sListIterator.next();
-                    String c = b.getEquipmentIp().toString();
-                    if (c.equals(deleteIp)) {
-                        sListIterator.remove();
-                    }
-                }
-//                Log.i("", "删除后集合的长度为:" + beanList.size() + ":" + beanList);
-            }
+            beanList.add(e);
+//            if (position == JUDGE_QUERY_DELETE) {
+//                beanList.add(e);
+//            } else if (deleteIp.equals(equipmentIp)) {
+//                InspectionDeviceDao dao = new InspectionDeviceDao(getContext());
+//                dao.delete(equipmentIp);
+////                Log.i("", "删除前:" + beanList.size() + ":" + beanList);
+//                Iterator<EquipmentBean> sListIterator = beanList.iterator();
+//                /*arraylist 删除东西**********************************************************************/
+//                while (sListIterator.hasNext()) {
+//                    EquipmentBean b = sListIterator.next();
+//                    String c = b.getEquipmentIp().toString();
+//                    if (c.equals(deleteIp)) {
+//                        sListIterator.remove();
+//                    }
+//                }
+////                Log.i("", "删除后集合的长度为:" + beanList.size() + ":" + beanList);
+//            }
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        beanList.clear();
+        queryAddData();
+        adapter.notifyDataSetChanged();//更新?
+    }
+
 
     public void add1() {
 //        InspectionDeviceDao dao = new InspectionDeviceDao(getActivity());
