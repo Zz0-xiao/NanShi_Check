@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private TabLayout tabLayout;
     private String[] tab_names;
 
-    private FloatingActionButton fab;////
+    private FloatingActionButton fab;//
 
     @Override
     protected int getContentView() {
@@ -74,18 +74,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         });
     }
 
-/*
-    //回调隐藏fab
-    public void invisible() {
-        fab.setVisibility(View.INVISIBLE);
-    }
 
-    //回调显示fab
-    public void visible() {
-        fab.setVisibility(View.VISIBLE);
-    }
-*/
-
+//    //回调隐藏fab
+//    public void invisible() {
+//        fab.setVisibility(View.INVISIBLE);
+//    }
+//
+//    //回调显示fab
+//    public void visible() {
+//        fab.setVisibility(View.VISIBLE);
+//    }
 
     private void initTabLayout() {
         viewPager = findView(R.id.viewPager);
@@ -169,5 +167,4 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }
