@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".activity.AddStudentActivity">
         </activity>
+        <activity android:name=".activity.WifiTestActivity">
+        </activity>
     </application>
 
 </manifest> <!-- android:theme="@style/GeneralTheme" -->

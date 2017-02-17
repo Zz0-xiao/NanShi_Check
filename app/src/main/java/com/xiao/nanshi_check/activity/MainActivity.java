@@ -154,7 +154,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.nav_rights_management) {
 
         } else if (id == R.id.nav_test_question_management) {
-
+            startActivity(new Intent(MainActivity.this, WifiTestActivity.class));
         } else if (id == R.id.nav_other) {
 
         } else if (id == R.id.nav_About_me) {
