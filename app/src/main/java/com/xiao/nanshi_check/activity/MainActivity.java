@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.FragmentAdapter;
+import com.xiao.nanshi_check.temp.WifiTestActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
