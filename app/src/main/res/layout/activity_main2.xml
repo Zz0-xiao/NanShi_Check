@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.xiao.nanshi_check.temp.Main2Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/id_edt_jieshou"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:focusable="false"
+            android:gravity="top"
+            android:hint="接收区" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/id_edt_sendArea"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:focusable="true"
+        android:gravity="top"
+        android:hint="发送区"
+        android:minLines="3"
+        android:text="ONON1">
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/id_btn_sen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="send"
+        android:text="发送" />
+</LinearLayout>

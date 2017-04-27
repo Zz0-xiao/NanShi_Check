@@ -100,7 +100,7 @@ public class WifiTestActivity extends BaseActivity implements View.OnClickListen
             case R.id.id_btn_send:
                 sendData();
                 break;
-            case R.id.clean_Receiving:
+            case R.id.clean_Receiving://////////////////////////////////////////////
                 edtReceiver.setText("");
                 break;
             case R.id.ONON0:

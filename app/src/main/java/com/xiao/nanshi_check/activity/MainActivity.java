@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.xiao.nanshi_check.R;
 import com.xiao.nanshi_check.adapter.FragmentAdapter;
+import com.xiao.nanshi_check.temp.Main2Activity;
 import com.xiao.nanshi_check.temp.WifiTestActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -157,7 +158,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.nav_test_question_management) {
             startActivity(new Intent(MainActivity.this, WifiTestActivity.class));
         } else if (id == R.id.nav_other) {
-
+            startActivity(new Intent(MainActivity.this, Main2Activity.class));
         } else if (id == R.id.nav_About_me) {
 
         } else if (id == R.id.nav_theme) {

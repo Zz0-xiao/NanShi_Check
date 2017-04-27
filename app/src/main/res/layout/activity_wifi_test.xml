@@ -14,8 +14,10 @@
         android:id="@+id/id_mainbody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <!-- 1.IP 地址和其输入框 -->
         <LinearLayout
             android:layout_width="match_parent"
